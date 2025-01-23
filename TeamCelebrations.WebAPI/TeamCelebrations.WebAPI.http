@@ -1,0 +1,6 @@
+@TeamCelebrations.WebAPI_HostAddress = http://localhost:5204
+
+GET {{TeamCelebrations.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
