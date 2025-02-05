@@ -6,6 +6,9 @@ namespace TeamCelebrations.Data.DataAccess
     public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
     {
         public DbSet<Employee>? Employees { get; set; }
+        public DbSet<Event>? Events { get; set; }
+        public DbSet<Message>? Messages { get; set; }
+        public DbSet<Notification>? Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -53,4 +56,6 @@ namespace TeamCelebrations.Data.DataAccess
 /*
 Add-Migration UpdateEmployee -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
 Update-Database -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
+"password": "XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg="
+"email": "rulbricht@teamcelebrations.com",
 */
