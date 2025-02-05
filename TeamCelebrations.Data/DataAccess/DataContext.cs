@@ -51,6 +51,6 @@ namespace TeamCelebrations.Data.DataAccess
 }
 
 /*
-Add-Migration AddEntities -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
+Add-Migration UpdateEmployee -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
 Update-Database -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
 */
