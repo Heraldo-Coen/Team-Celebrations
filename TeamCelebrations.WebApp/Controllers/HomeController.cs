@@ -18,6 +18,11 @@ namespace TeamCelebrations.WebApp.Controllers
             return View();
         }
 
+        public IActionResult Friends()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
