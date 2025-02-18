@@ -6,6 +6,8 @@ namespace TeamCelebrations.Data.Entities
     {
         public string? PhoneNumber { get; set; }
 
+        public Guid PhoneCodeId { get; set; }
+
         public bool? IsPhoneVerified { get; set; } = false;
 
         [Required]
@@ -13,5 +15,8 @@ namespace TeamCelebrations.Data.Entities
 
         [Required]
         public DateTime HireDate { get; set; } = DateTime.MinValue;
+
+        [ForeignKey(nameof(PhoneCodeId))]
+        public virtual PhoneCode PhoneCode { get; set; }
     }
 }
