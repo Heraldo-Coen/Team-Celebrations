@@ -5,7 +5,11 @@ namespace TeamCelebrations.Data.DataAccess
 {
     public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
     {
+        public DbSet<PhoneCode> PhoneCodes { get; set; }
+        public DbSet<Administrator>? Administrators { get; set; }
+        public DbSet<Unit>? Units { get; set; }
         public DbSet<Employee>? Employees { get; set; }
+        public DbSet<Friendship>? Friendships {get; set; }
         public DbSet<Event>? Events { get; set; }
         public DbSet<Message>? Messages { get; set; }
         public DbSet<Notification>? Notifications { get; set; }
@@ -13,6 +17,30 @@ namespace TeamCelebrations.Data.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // Phone Code
+            modelBuilder.Entity<PhoneCode>(builder => {
+                builder.HasIndex(p => p.Code).IsUnique();
+
+                builder.HasIndex(p => p.CountryName).IsUnique();
+
+                builder.HasIndex(p => p.CountryCode).IsUnique();
+            });
+
+            // Administrator
+            modelBuilder.Entity<Administrator>(builder => {
+                builder.HasIndex(a => new {
+                    a.FirstName,
+                    b.LastName,
+                }).IsUnique();
+
+                builder.HasIndex(a => a.Email).IsUnique();
+            });
+
+            // Unit
+            modelBuilder.Entity<Unit>(builder => {
+                builder.HasIndex(u => u.Name).IsUnique();
+            });
 
             // Employee
             modelBuilder.Entity<Employee>(builder =>
@@ -26,6 +54,10 @@ namespace TeamCelebrations.Data.DataAccess
                 builder.HasIndex(e => e.Email).IsUnique();
 
                 builder.HasIndex(e => e.PhoneNumber).IsUnique();
+            });
+
+            // Friendship
+            modelBuilder.Entity<Friendship>(builder => {
             });
 
             // Event
