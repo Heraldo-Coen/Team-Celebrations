@@ -9,6 +9,9 @@ namespace TeamCelebrations.Data.Entities
         public int Code { get; set; }
         
         [Required]
+        public int Length { get; set; }
+
+        [Required]
         public string? CountryName { get; set; }
 
         [Required]
