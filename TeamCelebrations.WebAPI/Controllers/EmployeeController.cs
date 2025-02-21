@@ -16,21 +16,26 @@ namespace TeamCelebrations.WebAPI.Controllers
 
         #region IUSERCONTROLLER METHODS
 
+        public Task<ActionResult> SignUp(SignUpRequest signUpRequest)
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpPost]
         [Route("SignUp")]
-        public async Task<ActionResult> SignUp(SignUpRequest signUpRequest)
+        public async Task<ActionResult> SignUp(EmployeeSignUpRequest employeeSignUpRequest)
         {
             try
             {
                 await _dataContext!.Employees!.AddAsync(new Employee()
                 {
-                    FirstName = signUpRequest.FirstName,
-                    LastName = signUpRequest.LastName,
-                    Email = signUpRequest.Email,
-                    PasswordHash = signUpRequest.PasswordHash,
-                    PhoneNumber = signUpRequest.PhoneNumber,
-                    BirthDate = signUpRequest.BirthDate,
-                    HireDate = signUpRequest.HireDate,
+                    FirstName = employeeSignUpRequest!.FirstName,
+                    LastName = employeeSignUpRequest.LastName,
+                    Email = employeeSignUpRequest.Email,
+                    PasswordHash = employeeSignUpRequest.PasswordHash,
+                    PhoneNumber = employeeSignUpRequest.PhoneNumber,
+                    BirthDate = employeeSignUpRequest.BirthDate,
+                    HireDate = employeeSignUpRequest.HireDate,
                 });
 
                 await _dataContext.SaveChangesAsync();
@@ -289,7 +294,7 @@ namespace TeamCelebrations.WebAPI.Controllers
                 return BadRequest(ex.ToString());
             }
         }
-
+        
         #endregion
     }
 }

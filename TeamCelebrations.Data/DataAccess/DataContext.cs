@@ -31,7 +31,7 @@ namespace TeamCelebrations.Data.DataAccess
             modelBuilder.Entity<Administrator>(builder => {
                 builder.HasIndex(a => new {
                     a.FirstName,
-                    b.LastName,
+                    a.LastName,
                 }).IsUnique();
 
                 builder.HasIndex(a => a.Email).IsUnique();
@@ -86,7 +86,7 @@ namespace TeamCelebrations.Data.DataAccess
 }
 
 /*
-Add-Migration UpdateEmployee -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
+Add-Migration UnitIdAddToEmployee -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
 Update-Database -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
 "password": "XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg="
 "email": "rulbricht@teamcelebrations.com",

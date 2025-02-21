@@ -21,6 +21,8 @@ namespace TeamCelebrations.WebAPI.Controllers
 
         Task<ActionResult> SignUp(SignUpRequest signUpRequest);
 
+        Task<ActionResult> SignUp(EmployeeSignUpRequest employeeSignUpRequest);
+
         Task<ActionResult> LogIn(LogInRequest logInRequest);
 
         Task<ActionResult> SendResetPasswordEmail(string email);
