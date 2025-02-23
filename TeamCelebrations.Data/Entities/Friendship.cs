@@ -7,6 +7,9 @@ namespace TeamCelebrations.Data.Entities
     {
         private Guid _employeeId1 = Guid.Empty;
 
+        /// <summary>
+        /// For the employee who requested the friendship.
+        /// </summary>
         [Required]
         public Guid EmployeeId1 
         { 
@@ -25,6 +28,9 @@ namespace TeamCelebrations.Data.Entities
 
         private Guid _employeeId2 = Guid.Empty;
 
+        /// <summary>
+        /// For the employee who received the friendship request.
+        /// </summary>
         [Required]
         public Guid EmployeeId2 { 
             get { return _employeeId1; } 
@@ -39,6 +45,11 @@ namespace TeamCelebrations.Data.Entities
                 }
             }
         }
+
+        [Required]
+        public bool IsAccepted { get; set; } = false;
+
+        public DateTime? AcceptanceDate { get; set; }
 
         [ForeignKey(nameof(EmployeeId1))]
         public virtual Employee? Employee1 { get; set; }

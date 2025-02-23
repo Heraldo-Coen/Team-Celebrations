@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Ignore Spelling: DNI
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,8 @@ namespace TeamCelebrations.Data.Requests
 {
     public class EmployeeSignUpRequest : SignUpRequest
     {
+        public string? DNI { get; set; }
+
         public string? PhoneNumber { get; set; }
 
         public Guid PhoneCodeId { get; set; }

@@ -45,6 +45,8 @@ namespace TeamCelebrations.Data.DataAccess
             // Employee
             modelBuilder.Entity<Employee>(builder =>
             {
+                builder.HasIndex(p => p.DNI).IsUnique();    
+
                 builder.HasIndex(e => new
                 {
                     e.FirstName,
@@ -53,11 +55,20 @@ namespace TeamCelebrations.Data.DataAccess
 
                 builder.HasIndex(e => e.Email).IsUnique();
 
-                builder.HasIndex(e => e.PhoneNumber).IsUnique();
+                builder.HasIndex(e => new
+                {
+                    e.PhoneCodeId,
+                    e.PhoneNumber,
+                }).IsUnique();
             });
 
             // Friendship
             modelBuilder.Entity<Friendship>(builder => {
+                builder.HasIndex(f => new
+                {
+                    f.EmployeeId1,
+                    f.EmployeeId2,
+                }).IsUnique();
             });
 
             // Event
@@ -86,7 +97,7 @@ namespace TeamCelebrations.Data.DataAccess
 }
 
 /*
-Add-Migration UnitIdAddToEmployee -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
+Add-Migration AddCostraintsToEmployeeIDsToFriendship -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
 Update-Database -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
 "password": "XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg="
 "email": "rulbricht@teamcelebrations.com",

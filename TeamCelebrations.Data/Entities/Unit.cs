@@ -10,7 +10,7 @@ namespace TeamCelebrations.Data.Entities
     {
         public string? Name { get; set; }
 
-        public Guid HigherUnitId { get; set; }
+        public Guid? HigherUnitId { get; set; }
 
         [ForeignKey(nameof(HigherUnitId))]
         public virtual Unit? HigherUnit { get; set; }
