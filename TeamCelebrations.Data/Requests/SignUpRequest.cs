@@ -9,11 +9,5 @@
         public string? Email { get; set; }
 
         public byte[]? PasswordHash { get; set; }
-
-        public string? PhoneNumber { get; set; }
-
-        public DateTime BirthDate { get; set; }
-
-        public DateTime HireDate { get; set; }
     }
 }

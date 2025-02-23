@@ -3,10 +3,10 @@ using TeamCelebrations.Data.Requests;
 
 namespace TeamCelebrations.WebAPI.Controllers
 {
-    public interface IUserController
+    public interface IUserController<TSignUpRequest> where TSignUpRequest : SignUpRequest
     {
         // Constants for locking user account
-        const int LOG_IN_UNLOCK_MINUTES = 10;
+        public const int LOG_IN_UNLOCK_MINUTES = 10;
         const int MAX_LOGIN_ATTEMPTS = 3;
 
         // Constants for verification code
@@ -17,9 +17,12 @@ namespace TeamCelebrations.WebAPI.Controllers
         const int RESET_PASSWORD_UNLOCK_MINUTES = 60;
         const int MAX_RESET_PASSWORD_ATTEMPTS = 3;
 
+        const string EMAIL_ALREADY_USED_EXCEPTION_MESSAGE_1 = "23505: duplicate key value violates unique constraint";
+        const string EMAIL_ALREADY_USED_EXCEPTION_MESSAGE_2 = "IX_Users_Email";
+
         #region METHODS
 
-        Task<ActionResult> SignUp(SignUpRequest signUpRequest);
+        Task<ActionResult> SignUp(TSignUpRequest signUpRequest);
 
         Task<ActionResult> LogIn(LogInRequest logInRequest);
 

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TeamCelebrations.Data.DataAccess;
@@ -11,9 +12,11 @@ using TeamCelebrations.Data.DataAccess;
 namespace TeamCelebrations.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250221160333_UnitIdAddToEmployee")]
+    partial class UnitIdAddToEmployee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,10 +112,6 @@ namespace TeamCelebrations.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("DNI")
-                        .HasMaxLength(8)
-                        .HasColumnType("character varying(8)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -126,9 +125,6 @@ namespace TeamCelebrations.Data.Migrations
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<bool>("IsAccepted")
-                        .HasColumnType("boolean");
-
                     b.Property<bool>("IsConnected")
                         .HasColumnType("boolean");
 
@@ -138,7 +134,7 @@ namespace TeamCelebrations.Data.Migrations
                     b.Property<bool>("IsLocked")
                         .HasColumnType("boolean");
 
-                    b.Property<bool>("IsPhoneVerified")
+                    b.Property<bool?>("IsPhoneVerified")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("IsVerified")
@@ -185,18 +181,17 @@ namespace TeamCelebrations.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DNI")
+                    b.HasIndex("Email")
                         .IsUnique();
 
-                    b.HasIndex("Email")
+                    b.HasIndex("PhoneCodeId");
+
+                    b.HasIndex("PhoneNumber")
                         .IsUnique();
 
                     b.HasIndex("UnitId");
 
                     b.HasIndex("FirstName", "LastName")
-                        .IsUnique();
-
-                    b.HasIndex("PhoneCodeId", "PhoneNumber")
                         .IsUnique();
 
                     b.ToTable("Employees");
@@ -240,9 +235,6 @@ namespace TeamCelebrations.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime?>("AcceptanceDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -252,9 +244,6 @@ namespace TeamCelebrations.Data.Migrations
                     b.Property<Guid>("EmployeeId2")
                         .HasColumnType("uuid");
 
-                    b.Property<bool>("IsAccepted")
-                        .HasColumnType("boolean");
-
                     b.Property<bool>("IsEnabled")
                         .HasColumnType("boolean");
 
@@ -263,10 +252,9 @@ namespace TeamCelebrations.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId2");
+                    b.HasIndex("EmployeeId1");
 
-                    b.HasIndex("EmployeeId1", "EmployeeId2")
-                        .IsUnique();
+                    b.HasIndex("EmployeeId2");
 
                     b.ToTable("Friendships");
                 });
@@ -404,7 +392,7 @@ namespace TeamCelebrations.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid?>("HigherUnitId")
+                    b.Property<Guid>("HigherUnitId")
                         .HasColumnType("uuid");
 
                     b.Property<bool>("IsEnabled")
@@ -514,7 +502,9 @@ namespace TeamCelebrations.Data.Migrations
                 {
                     b.HasOne("TeamCelebrations.Data.Entities.Unit", "HigherUnit")
                         .WithMany()
-                        .HasForeignKey("HigherUnitId");
+                        .HasForeignKey("HigherUnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("HigherUnit");
                 });

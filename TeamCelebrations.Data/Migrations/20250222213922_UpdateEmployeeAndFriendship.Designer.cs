@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TeamCelebrations.Data.DataAccess;
@@ -11,9 +12,11 @@ using TeamCelebrations.Data.DataAccess;
 namespace TeamCelebrations.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250222213922_UpdateEmployeeAndFriendship")]
+    partial class UpdateEmployeeAndFriendship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -263,10 +266,9 @@ namespace TeamCelebrations.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId2");
+                    b.HasIndex("EmployeeId1");
 
-                    b.HasIndex("EmployeeId1", "EmployeeId2")
-                        .IsUnique();
+                    b.HasIndex("EmployeeId2");
 
                     b.ToTable("Friendships");
                 });

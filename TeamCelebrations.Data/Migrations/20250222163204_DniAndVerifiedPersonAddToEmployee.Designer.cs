@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TeamCelebrations.Data.DataAccess;
@@ -11,9 +12,11 @@ using TeamCelebrations.Data.DataAccess;
 namespace TeamCelebrations.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250222163204_DniAndVerifiedPersonAddToEmployee")]
+    partial class DniAndVerifiedPersonAddToEmployee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,6 +113,7 @@ namespace TeamCelebrations.Data.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("DNI")
+                        .IsRequired()
                         .HasMaxLength(8)
                         .HasColumnType("character varying(8)");
 
@@ -191,12 +195,14 @@ namespace TeamCelebrations.Data.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
+                    b.HasIndex("PhoneCodeId");
+
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique();
+
                     b.HasIndex("UnitId");
 
                     b.HasIndex("FirstName", "LastName")
-                        .IsUnique();
-
-                    b.HasIndex("PhoneCodeId", "PhoneNumber")
                         .IsUnique();
 
                     b.ToTable("Employees");
@@ -240,9 +246,6 @@ namespace TeamCelebrations.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime?>("AcceptanceDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -252,9 +255,6 @@ namespace TeamCelebrations.Data.Migrations
                     b.Property<Guid>("EmployeeId2")
                         .HasColumnType("uuid");
 
-                    b.Property<bool>("IsAccepted")
-                        .HasColumnType("boolean");
-
                     b.Property<bool>("IsEnabled")
                         .HasColumnType("boolean");
 
@@ -263,10 +263,9 @@ namespace TeamCelebrations.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId2");
+                    b.HasIndex("EmployeeId1");
 
-                    b.HasIndex("EmployeeId1", "EmployeeId2")
-                        .IsUnique();
+                    b.HasIndex("EmployeeId2");
 
                     b.ToTable("Friendships");
                 });
