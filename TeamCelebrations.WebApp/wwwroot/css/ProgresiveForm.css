@@ -1,0 +1,79 @@
+﻿.progressive-container {
+    width: 400px;
+    height: 450px;
+    margin: 2rem auto;
+    background-color: var(--white-color);
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    position: relative;
+}
+
+.progressive-container form {
+    width: 340px;
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    font-family: inherit;
+    transition: 0.5s ease-in;
+}
+
+#form2 {
+    left: 450px;
+}
+
+#form3 {
+    left: 450px;
+}
+
+.progress_container {
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+    margin: 3rem;
+    position: relative;
+}
+
+.progress_container::before {
+    content: "";
+    background-color: lightgray;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 100%;
+    z-index: 1;
+}
+
+.progress {
+    background-color: mediumpurple;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 0%;
+    z-index: 1;
+    transition: 0.4s ease-in;
+}
+
+.circle {
+    color: black;
+    background-color: lightgray;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 1;
+    transition: 0.4s ease;
+}
+
+.circle.active {
+
+    border-color: mediumpurple;
+    color: white;
+    background-color: mediumpurple;
+}

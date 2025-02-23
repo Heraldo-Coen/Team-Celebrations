@@ -11340,32 +11340,32 @@ body.sidebar-toggled footer.sticky-footer {
 /*
     * Custom styles for the input field
 */
-.input {
+.floating-label-input {
     position: relative;
     width: 100%;
-    margin: 0;
     padding: 0;
 }
 
-.input__label {
+.input-label {
     position: absolute;
     left: 0;
     top: 0;
-    padding: calc(.5rem * .75) calc(.75rem * .75);
-    margin: calc(.5rem * .75 + 3px) calc(.5rem * .5);
+    padding: .25rem;
+    margin: calc(.5rem * .75 + 3px) calc(2rem * .5);
     white-space: nowrap;
     transform: translate(0, 0);
     transform-origin: 0 0;
     transition: transform 120ms ease-in;
     font-size: 0.8rem;
+    pointer-events: none;
 }
 
 
-.input__field:focus + .input__label,
-.input__field:not(:placeholder-shown) + .input__label {
-    transform: translate(calc(.5rem * .75), -65%) scale(.8);
+.input-field:focus + .input-label,
+.input-field:not(:placeholder-shown) + .input-label {
+    transform: translateY(-65%) scale(.8);
     color: #2e59d9;
     background: white;
-    padding: calc(.5rem * .75) calc(.5rem * .5);
+    padding: 0.25rem;
     font-weight: bold;
 }

@@ -56,7 +56,7 @@
 })(jQuery); // End of use strict
 
 
-//
+// floating-label-input
 let timer;
 
 document.addEventListener('input', e => {
