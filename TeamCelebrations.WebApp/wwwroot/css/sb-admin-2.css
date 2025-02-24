@@ -11349,8 +11349,8 @@ body.sidebar-toggled footer.sticky-footer {
 .input-label {
     position: absolute;
     left: 0;
-    top: 0;
-    padding: .25rem;
+    top: 0px;
+    padding: .45rem .25rem;
     margin: calc(.5rem * .75 + 3px) calc(2rem * .5);
     white-space: nowrap;
     transform: translate(0, 0);

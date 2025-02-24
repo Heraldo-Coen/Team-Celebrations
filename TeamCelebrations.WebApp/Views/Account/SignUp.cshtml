@@ -24,7 +24,7 @@
 
     <!-- Custom styles for this template-->
     <link href="~/css/sb-admin-2.css" rel="stylesheet">
-    <link href="~/css/ProgresiveForm.css" rel="stylesheet">
+    <link href="~/css/progressive-form.css" rel="stylesheet">
 </head>
 
 <body class="bg-gradient-info">
@@ -54,91 +54,119 @@
                                 </div>
 
                                 <div class="progressive-container">
-                                        <form class="user pt-0 pb-5 px-5 " id="form1">
-                                            <div class="text-center">
-                                                <h1 class="h4 text-gray-900 mb-4">Welcome</h1>
-                                            </div>
-                                            <div class="form-group floating-label-input">
-                                                <input class="input-field form-control form-control-user" placeholder="" type="text" id="firstName" />
-                                                <label for="firstName" class="input-label">First Name</label>
-                                            </div>
 
-                                            <div class="form-group floating-label-input">
-                                                <input class="input-field form-control form-control-user" placeholder="" type="text" id="lastName" />
-                                                <label class="input-label">Last Name</label>
-                                            </div>
+                                    <!-- PERSONAL INFORMATION -->
+                                    <form class="user" id="form1">
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">Personal Information</h1>
+                                        </div>
+                                        <div class="form-group floating-label-input">
+                                            <input class="input-field form-control form-control-user" placeholder="" type="text" id="firstName" />
+                                            <label for="firstName" class="input-label">First Name</label>
+                                        </div>
 
-                                            <div class="form-group">
-                                                <input type="password" class="form-control form-control-user" placeholder="Password">
-                                            </div>
+                                        <div class="form-group floating-label-input">
+                                            <input class="input-field form-control form-control-user" placeholder="" type="text" id="lastName" />
+                                            <label class="input-label">Last Name</label>
+                                        </div>
 
-                                            <div class="form-group">
-                                                <div class="custom-control custom-checkbox small">
-                                                    <input type="checkbox" class="custom-control-input" id="chkMantenerSesion">
-                                                    <label class="custom-control-label" for="chkMantenerSesion">Mantener Sesión</label>
+                                        <div class="form-group floating-label-input">
+                                            <input class="input-field form-control form-control-user" placeholder="" type="date" id="birthDate">
+                                            <label class="input-label">Birth Date</label>
+                                        </div>
+
+                                        <div class="form-group floating-label-input">
+                                            <input class="input-field form-control form-control-user" placeholder="" type="text" id="dni" />
+                                            <label class="input-label">DNI</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="chkMantenerSesion">
+                                                <label class="custom-control-label" for="chkMantenerSesion">Mantener Sesión</label>
+                                            </div>
+                                        </div>
+
+                                        <!-- @if (ViewData["Mensaje"] != null)
+                                        {
+                                                        <div class="form-group">
+                                                            <div class="alert alert-danger" role="alert">
+                                                    @ViewData["Mensaje"]
+                                                            </div>
+                                                        </div>
+                                        }
+                                         -->
+
+                                        <div class="row">
+                                            <div class="col-5 m-auto"></div>
+
+                                            <a class="col-5 btn btn-primary btn-user btn-block m-auto" id="next1">Next</a>
+                                        </div>
+                                    </form>
+
+                                    <!-- CONTACT AND SECURITY INFORMATION -->
+                                    <form class="user" id="form2">
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">Contact and Security Information</h1>
+                                        </div>
+                                        <div class="form-group floating-label-input">
+                                            <input class="input-field form-control form-control-user" placeholder="" type="email" id="email" />
+                                            <label for="email" class="input-label">Email</label>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group floating-label-input col-3 mx-auto">
+                                                <input class="input-field form-control form-control-user" placeholder="" type="text" id="phoneCode" />
+
+                                                <div class="position-absolute row">
+                                                    <span class="col-12">+51</span>
+                                                    <span class="col-12">+52</span>
+                                                    <span class="col-12">+53</span>
                                                 </div>
                                             </div>
 
-                                            <!-- @if (ViewData["Mensaje"] != null)
-                                            {
+                                            <div class="form-group floating-label-input col-8 mx-auto">
+                                                <input class="input-field form-control form-control-user" placeholder="" type="tel" id="phoneNumber" />
+                                                <label for="phoneNumber" class="input-label">Phone Number</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group floating-label-input">
+                                            <input class="input-field form-control form-control-user" placeholder="" type="password" id="password" />
+                                            <label for="repeatPassword" class="input-label">Password</label>
+                                        </div>
+
+                                        <div class="form-group floating-label-input">
+                                            <input class="input-field form-control form-control-user" placeholder="" type="password" id="repeatPassword" />
+                                            <label for="repeatPassword" class="input-label">Repeat Password</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="chkMantenerSesion">
+                                                <label class="custom-control-label" for="chkMantenerSesion">Mantener Sesión</label>
+                                            </div>
+                                        </div>
+
+                                        <!-- 
+                                        @if (ViewData["Mensaje"] != null)
+                                        {
                                                             <div class="form-group">
                                                                 <div class="alert alert-danger" role="alert">
-                                                        @ViewData["Mensaje"]
+                                                    @ViewData["Mensaje"]
                                                                 </div>
                                                             </div>
-                                            }
-                                             -->
+                                        }
+                                        -->
 
-                                            <a class="btn btn-primary btn-user btn-block" id="next1">Sign Up</a>
-                                            <!-- <button type="submit" class="btn btn-primary btn-user btn-block">
-                                                Ingresar
-                                            </button> -->
-                                        </form>
+                                        <div class="row">
+                                            <a class="col-5 btn btn-secondary btn-user btn-block m-auto" id="back1">Back</a>
 
-                                        <form class="user pt-0 pb-5 px-5" id="form2">
-                                            <div class="text-center">
-                                                <h1 class="h4 text-gray-900 mb-4">Welcome 2</h1>
-                                            </div>
-                                            <div class="form-group floating-label-input">
-                                                <input class="input-field form-control form-control-user" placeholder="" type="text" id="firstName" />
-                                                <label for="firstName" class="input-label">First Name</label>
-                                            </div>
+                                            <a class="col-5 btn btn-primary btn-user btn-block m-auto" id="next2">Next</a>
+                                        </div>
+                                    </form>
 
-                                            <div class="form-group floating-label-input">
-                                                <input class="input-field form-control form-control-user" placeholder="" type="text" id="lastName" />
-                                                <label class="input-label">Last Name</label>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <input type="password" class="form-control form-control-user" placeholder="Password">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="custom-control custom-checkbox small">
-                                                    <input type="checkbox" class="custom-control-input" id="chkMantenerSesion">
-                                                    <label class="custom-control-label" for="chkMantenerSesion">Mantener Sesión</label>
-                                                </div>
-                                            </div>
-
-                                            <!-- @if (ViewData["Mensaje"] != null)
-                                            {
-                                                                <div class="form-group">
-                                                                    <div class="alert alert-danger" role="alert">
-                                                        @ViewData["Mensaje"]
-                                                                    </div>
-                                                                </div>
-                                            }
-                                             -->
-
-                                            <a class="btn btn-secondary btn-user btn-block" id="back1">Back</a>
-
-                                            <a class="btn btn-primary btn-user btn-block" id="next2">Sign Up</a>
-                                            <!-- <button type="submit" class="btn btn-primary btn-user btn-block">
-                                                Ingresar
-                                            </button> -->
-                                        </form>
-
-                                    <form class="user pt-0 pb-5 px-5" id="form3">
+                                    <form class="user" id="form3">
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Welcome 3</h1>
                                         </div>
@@ -173,22 +201,18 @@
                                         }
                                          -->
 
-                                        <a class="btn btn-secondary btn-user btn-block" id="back2">Back</a>
+                                         <div class="row">
+                                            <a class="col-5 btn btn-secondary btn-user btn-block m-auto" id="back2">Back</a>
 
-                                        <a class="btn btn-primary btn-user btn-block" id="Submit">Sign Up</a>
+                                            <a class="col-5 btn btn-primary btn-user btn-block m-auto" id="Submit">Sign Up</a>
+                                         </div>
+                                        
                                         <!-- <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Ingresar
                                         </button> -->
                                     </form>
-                                        
-                                        <hr>
-                                        <div class="text-center">
-                                            <a class="small" href="forgot-password.html">¿Olvidó su contraseña?</a>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -206,7 +230,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="~/js/sb-admin-2.js"></script>
-    <script src="~/js/ProgesiveForm.js"></script>
+    <script src="~/js/progressive-form.js"></script>
     <script src="~/vendor/toastr/toastr.min.js"></script>
     <script src="~/vendor/sweetalert/sweetalert.js"></script>
     <script src="~/vendor/loadingoverlay/loadingoverlay.min.js"></script>

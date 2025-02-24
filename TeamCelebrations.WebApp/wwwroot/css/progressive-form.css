@@ -1,19 +1,16 @@
 ﻿.progressive-container {
-    width: 400px;
+    width: 85%;
     height: 450px;
-    margin: 2rem auto;
-    background-color: var(--white-color);
+    margin: auto;
     overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
     position: relative;
 }
 
-.progressive-container form {
-    width: 340px;
+.progressive-container form {  
+    padding: 0 1rem;
+    width: 100%;
     position: absolute;
-    top: 100px;
-    left: 20px;
+    left: 0px;
     font-family: inherit;
     transition: 0.5s ease-in;
 }
@@ -27,10 +24,10 @@
 }
 
 .progress_container {
-    width: 350px;
+    width: 75%;
     display: flex;
     justify-content: space-between;
-    margin: 3rem;
+    margin: 2rem auto;
     position: relative;
 }
 
@@ -47,7 +44,7 @@
 }
 
 .progress {
-    background-color: mediumpurple;
+    background-color: #4e73df;
     position: absolute;
     top: 50%;
     left: 0;
@@ -72,8 +69,7 @@
 }
 
 .circle.active {
-
-    border-color: mediumpurple;
-    color: white;
-    background-color: mediumpurple;
+    color: #fff;
+    background-color: #4e73df;
+    border-color: #4e73df;
 }

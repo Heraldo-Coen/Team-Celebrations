@@ -10,7 +10,7 @@ let currectActive = 1;
 function nextOne() {
     console.log("nextOne");
     form1.style.left = "-450px";
-    form2.style.left = "25px";
+    form2.style.left = "0px";
     //next slide
     increamentNumber();
     // update progress bar
@@ -18,7 +18,7 @@ function nextOne() {
 }
 //=============== Back One==================
 function backOne() {
-    form1.style.left = "25px";
+    form1.style.left = "0px";
     form2.style.left = "450px";
     // back slide
     decreametNumber();
@@ -28,7 +28,7 @@ function backOne() {
 //============ Second Form=============
 function nextTwo() {
     form2.style.left = "-450px";
-    form3.style.left = "25px";
+    form3.style.left = "0px";
     //next slide
     increamentNumber();
     // update progress bar
@@ -36,7 +36,7 @@ function nextTwo() {
 }
 //=============== Back One==================
 function backTwo() {
-    form2.style.left = "25px";
+    form2.style.left = "0px";
     form3.style.left = "450px";
     // back slide
     decreametNumber();
@@ -78,11 +78,11 @@ const btnsEvents = () => {
     const next2 = document.getElementById("next2");
     const back1 = document.getElementById("back1");
     const back2 = document.getElementById("back2");
-    //next1
+    // next1
     next1.addEventListener("click", nextOne);
     // back1
     back1.addEventListener("click", backOne);
-    //next 2
+    // next 2
     next2.addEventListener("click", nextTwo);
     // back 2
     back2.addEventListener("click", backTwo);
