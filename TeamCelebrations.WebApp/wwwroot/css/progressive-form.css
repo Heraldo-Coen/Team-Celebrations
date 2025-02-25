@@ -73,3 +73,20 @@
     background-color: #4e73df;
     border-color: #4e73df;
 }
+
+/*
+    CUSTOM FORM SELECT
+*/
+
+.custom-form-select {
+    border-radius: 10rem;
+    padding: 0 1rem;
+    font-size: 0.8rem;
+    height: 3.25rem;
+}
+
+.custom-form-select-option {
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   
+}
