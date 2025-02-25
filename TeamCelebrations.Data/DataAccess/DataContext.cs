@@ -40,6 +40,8 @@ namespace TeamCelebrations.Data.DataAccess
             // Unit
             modelBuilder.Entity<Unit>(builder => {
                 builder.HasIndex(u => u.Name).IsUnique();
+
+                builder.HasIndex(u => u.Acronym).IsUnique();
             });
 
             // Employee
@@ -97,7 +99,7 @@ namespace TeamCelebrations.Data.DataAccess
 }
 
 /*
-Add-Migration AddCostraintsToEmployeeIDsToFriendship -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
+Add-Migration AddAcronymToUnitAndRequired -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
 Update-Database -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
 "password": "XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg="
 "email": "rulbricht@teamcelebrations.com",

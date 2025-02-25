@@ -8,7 +8,11 @@ namespace TeamCelebrations.Data.Entities
     /// </summary>
     public class Unit : BaseEntity
     {
-        public string? Name { get; set; }
+        [Required]
+        public string Name { get; set; } = string.Empty;
+
+        [Required]
+        public string Acronym { get; set; } = string.Empty;
 
         public Guid? HigherUnitId { get; set; }
 
