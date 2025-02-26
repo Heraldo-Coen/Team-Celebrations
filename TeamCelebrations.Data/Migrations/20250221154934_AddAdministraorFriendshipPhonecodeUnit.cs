@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Ignore Spelling: Phonecode Administraor
+
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
