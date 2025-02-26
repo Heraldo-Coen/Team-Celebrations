@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TeamCelebrations.Data.DataAccess;
@@ -11,9 +12,11 @@ using TeamCelebrations.Data.DataAccess;
 namespace TeamCelebrations.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250225144658_AddAcronymToUnitAndRequired")]
+    partial class AddAcronymToUnitAndRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,46 +100,6 @@ namespace TeamCelebrations.Data.Migrations
                     b.ToTable("Administrators");
                 });
 
-            modelBuilder.Entity("TeamCelebrations.Data.Entities.Contract", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("ContractEndDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("ContractStartDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("IsEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("RenewalDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int?>("Status")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("Type")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("Contracts");
-                });
-
             modelBuilder.Entity("TeamCelebrations.Data.Entities.Employee", b =>
                 {
                     b.Property<Guid>("Id")
@@ -162,6 +125,9 @@ namespace TeamCelebrations.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
+
+                    b.Property<DateTime>("HireDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsAccepted")
                         .HasColumnType("boolean");
@@ -479,17 +445,6 @@ namespace TeamCelebrations.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Units");
-                });
-
-            modelBuilder.Entity("TeamCelebrations.Data.Entities.Contract", b =>
-                {
-                    b.HasOne("TeamCelebrations.Data.Entities.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("TeamCelebrations.Data.Entities.Employee", b =>

@@ -43,8 +43,8 @@ namespace TeamCelebrations.WebAPI.Controllers
 
                 await _dataContext.Friendships!.AddAsync(new Friendship()
                 {
-                    EmployeeId1 = friendshipRequest.EmployeeId1,
-                    EmployeeId2 = friendshipRequest.EmployeeId2
+                    EmployeeId1 = friendshipRequest.EmployeeId1!.Value,
+                    EmployeeId2 = friendshipRequest.EmployeeId2!.Value
                 });
 
                 await _dataContext.SaveChangesAsync();
