@@ -34,7 +34,7 @@ namespace TeamCelebrations.WebAPI.Controllers
                     PhoneNumber = employeeSignUpRequest.PhoneNumber,
                     PhoneCodeId = employeeSignUpRequest.PhoneCodeId,
                     BirthDate = employeeSignUpRequest.BirthDate,
-                    HireDate = employeeSignUpRequest.HireDate,
+                    //HireDate = employeeSignUpRequest.HireDate,
                     UnitId = employeeSignUpRequest.UnitId
                 });
 
