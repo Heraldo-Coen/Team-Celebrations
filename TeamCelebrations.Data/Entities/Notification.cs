@@ -17,7 +17,10 @@ namespace TeamCelebrations.Data.Entities
         [ForeignKey(nameof(EmployeeId))]
         public virtual Employee? Employee { get; set; }
 
-        public Guid EventId { get; set; }
+        /// <summary>
+        /// If the notification is related to an event.
+        /// </summary>
+        public Guid? EventId { get; set; }
 
         [ForeignKey(nameof(EventId))]
         public virtual Event? Event { get; set; }
