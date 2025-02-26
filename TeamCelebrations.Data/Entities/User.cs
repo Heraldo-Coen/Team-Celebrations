@@ -62,10 +62,7 @@ namespace TeamCelebrations.Data.Entities
         [Range(10000000, 99999999)]
         public int VerificationCode { get; set; } = 10000000;
 
-        /// <summary>
-        /// For email verification
-        /// </summary>
-        public bool IsVerified { get; set; } = false;
+        public bool IsEmailVerified { get; set; } = false;
 
         public DateTime VerificationCodeExpiration { get; set; } = DateTime.MinValue;
 

@@ -1,16 +1,10 @@
 ﻿// Ignore Spelling: DNI
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace TeamCelebrations.Data.Requests
 {
     public class EmployeeSignUpRequest : SignUpRequest
     {
-        public string? DNI { get; set; }
+        public string DNI { get; set; } = string.Empty;
 
         public string? PhoneNumber { get; set; }
 
@@ -18,8 +12,8 @@ namespace TeamCelebrations.Data.Requests
 
         public DateTime BirthDate { get; set; }
 
-        public DateTime HireDate { get; set; }
-
         public Guid UnitId { get; set; }
+
+        public ContractRequest? LastContract { get; set; }
     }
 }

@@ -105,7 +105,7 @@ namespace TeamCelebrations.Data.DataAccess
 }
 
 /*
-Add-Migration AddContractEntity -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
+Add-Migration UpdateEmployeeAndUpdateNotification -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
 Update-Database -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
 "password": "XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg="
 "email": "rulbricht@teamcelebrations.com",
