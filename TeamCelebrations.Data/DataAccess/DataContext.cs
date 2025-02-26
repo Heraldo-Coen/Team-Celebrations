@@ -9,6 +9,7 @@ namespace TeamCelebrations.Data.DataAccess
         public DbSet<Administrator>? Administrators { get; set; }
         public DbSet<Unit>? Units { get; set; }
         public DbSet<Employee>? Employees { get; set; }
+        public DbSet<Contract>? Contracts { get; set; }
         public DbSet<Friendship>? Friendships {get; set; }
         public DbSet<Event>? Events { get; set; }
         public DbSet<Message>? Messages { get; set; }
@@ -64,6 +65,11 @@ namespace TeamCelebrations.Data.DataAccess
                 }).IsUnique();
             });
 
+            // Contract
+            modelBuilder.Entity<Contract>(builder =>
+            {
+            });
+
             // Friendship
             modelBuilder.Entity<Friendship>(builder => {
                 builder.HasIndex(f => new
@@ -99,7 +105,7 @@ namespace TeamCelebrations.Data.DataAccess
 }
 
 /*
-Add-Migration AddAcronymToUnitAndRequired -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
+Add-Migration AddContractEntity -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
 Update-Database -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
 "password": "XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg="
 "email": "rulbricht@teamcelebrations.com",

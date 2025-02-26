@@ -25,9 +25,6 @@ namespace TeamCelebrations.Data.Entities
         public DateTime BirthDate { get; set; } = DateTime.MinValue;
 
         [Required]
-        public DateTime HireDate { get; set; } = DateTime.MinValue;
-
-        [Required]
         public Guid UnitId { get; set; }
 
         [ForeignKey(nameof(PhoneCodeId))]
