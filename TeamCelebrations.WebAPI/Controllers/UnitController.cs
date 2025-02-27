@@ -19,9 +19,9 @@ namespace TeamCelebrations.WebAPI.Controllers
         {
             try
             {
-                if (unitRequest.HigherUnitId != Guid.Empty)
+                if (unitRequest.HigherUnitId != null && unitRequest.HigherUnitId != Guid.Empty)
                 {
-                    // Verificar si el HigherUnitId existe en la tabla Units
+                    // Verify if HigherUnitId exists
                     var higherUnitExists = await _dataContext.Units!.AnyAsync(u => u.Id == unitRequest.HigherUnitId);
                     if (!higherUnitExists)
                     {
@@ -31,8 +31,9 @@ namespace TeamCelebrations.WebAPI.Controllers
 
                 await _dataContext.Units!.AddAsync(new Unit()
                 {
-                    Name = unitRequest.Name,
-                    //HigherUnitId = unitRequest.HigherUnitId
+                    Name = unitRequest.Name!,
+                    Acronym = unitRequest.Acronym!,
+                    HigherUnitId = unitRequest.HigherUnitId
                 });
 
                 await _dataContext.SaveChangesAsync();
@@ -42,6 +43,27 @@ namespace TeamCelebrations.WebAPI.Controllers
             catch (DbUpdateException ex) when (ex.InnerException != null)
             {
                 return Conflict(new { message = "Foreign key constraint violated." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+
+        [HttpGet]
+        [Route("GetAll")]
+        public async Task<ActionResult> GetAll()
+        {
+            try
+            {
+                var units = await _dataContext.Units!.ToListAsync();
+
+                if (units.Count == 0)
+                {
+                    return NoContent();
+                }
+
+                return Ok(units);
             }
             catch (Exception ex)
             {

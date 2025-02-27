@@ -172,7 +172,7 @@ namespace TeamCelebrations.WebAPI.Controllers
 
                 student.VerificationCode = new Random().Next(UserControllerConstants.VERIFICATION_MIN_RANGE_VALUE, UserControllerConstants.VERIFICATION_MAX_RANGE_VALUE);
                 student.VerificationCodeExpiration = DateTime.UtcNow.AddMinutes(UserControllerConstants.VERIFICATION_CODE_EXPIRED_MINUTES);
-                student.IsVerified = false;
+                student.IsEmailVerified = false;
 
                 await _dataContext.SaveChangesAsync();
                 /*
@@ -215,7 +215,7 @@ namespace TeamCelebrations.WebAPI.Controllers
                     return BadRequest(new { message = "Code expired." });
                 }
 
-                student.IsVerified = true;
+                student.IsEmailVerified = true;
 
                 await _dataContext.SaveChangesAsync();
 
@@ -257,7 +257,7 @@ namespace TeamCelebrations.WebAPI.Controllers
                 {
                     return BadRequest(new { message = "Code expired." });
                 }
-                else if (!student.IsVerified)
+                else if (!student.IsEmailVerified)
                 {
                     return BadRequest(new { message = "Code not verified." });
                 }
@@ -281,7 +281,7 @@ namespace TeamCelebrations.WebAPI.Controllers
 
                 student.VerificationCode = UserControllerConstants.VERIFICATION_CODE_NULL_VALUE;
                 student.VerificationCodeExpiration = DateTime.MinValue;
-                student.IsVerified = false;
+                student.IsEmailVerified = false;
                 student.PasswordHash = resetPasswordRequest.NewPasswordHash;
 
                 await _dataContext.SaveChangesAsync();
