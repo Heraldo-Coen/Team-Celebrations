@@ -109,4 +109,16 @@ Add-Migration UpdateEmployeeAndUpdateNotification -Project TeamCelebrations.Data
 Update-Database -Project TeamCelebrations.Data -StartupProject TeamCelebrations.WebAPI
 "password": "XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg="
 "email": "rulbricht@teamcelebrations.com",
+
+{
+  "firstName": "Alex",
+  "lastName": "Armstrong",
+  "email": "aarmstrong@teamcelebrations.com",
+  "passwordHash": "XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=",
+  "dni": "78945611",
+  "phoneNumber": "987456259",
+  "phoneCodeId": "de5e7aa1-b745-43bc-b5e1-724af6143cf7",
+  "birthdate": "2025-03-03T13:30:33.362Z",
+  "unitId": "ee450e7c-8e6e-4da9-b836-c01a11a8b384"
+}
 */

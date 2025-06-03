@@ -7,9 +7,7 @@
     {
         public Guid Id { get; set; }
 
-        public Guid EmployeeId { get; set; }
-
-        public Guid FriendId { get; set; }
+        public EmployeeProfileResponse? Friend { get; set; }
 
         public bool IsConfirmed { get; set; }
 

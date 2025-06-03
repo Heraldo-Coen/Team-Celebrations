@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extractor de Campos - Actas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Extractor de Datos de Documentos</h1>
+            <p>Sube una imagen o PDF de actas de matrimonio o nacimiento para extraer información importante</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-message">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3566/3566345.png" alt="Upload Icon" class="upload-icon">
+                        <p>Arrastra aquí tus archivos o <span class="browse-link">examina</span></p>
+                        <p class="file-types">Formatos soportados: .jpg, .jpeg, .png, .pdf</p>
+                    </div>
+                    <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.pdf" hidden>
+                </div>
+                <div class="selected-file" id="selectedFile">
+                    <p>Ningún archivo seleccionado</p>
+                </div>
+                <button id="analyzeButton" class="analyze-button" disabled>Procesar Documento</button>
+            </div>
+
+            <div class="results-section" id="resultsSection">
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Procesando documento...</p>
+                </div>
+                
+                <div class="results-container" id="resultsContainer">
+                    <h2>Resultados:</h2>
+                    <div class="document-preview">
+                        <h3>Vista previa del documento</h3>
+                        <div id="documentPreview"></div>
+                    </div>
+                    <div class="extracted-data">
+                        <h3>Datos extraídos</h3>
+                        <div id="extractedFields" class="fields-container"></div>
+                        <button id="fillFormButton" class="fill-form-button">Llenar formulario con estos datos</button>
+                    </div>
+                    <div class="raw-text">
+                        <h3>Texto completo extraído</h3>
+                        <div id="rawText" class="raw-text-container"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section" id="formSection">
+                <h2>Formulario de registro</h2>
+                <div class="form-toggle">
+                    <button class="form-toggle-btn active" id="toggleBirth">Acta de Nacimiento</button>
+                    <button class="form-toggle-btn" id="toggleMarriage">Acta de Matrimonio</button>
+                </div>
+                
+                <!-- Formulario para Acta de Nacimiento -->
+                <form id="birthForm" class="registration-form active-form">
+                    <h3>Acta de Nacimiento</h3>
+                    <div class="form-group">
+                        <label for="b_nombre_completo">Nombre completo:</label>
+                        <input type="text" id="b_nombre_completo" name="nombre_completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="b_fecha_nacimiento">Fecha de nacimiento:</label>
+                        <input type="text" id="b_fecha_nacimiento" name="fecha_nacimiento">
+                    </div>
+                    <div class="form-group">
+                        <label for="b_lugar_nacimiento">Lugar de nacimiento:</label>
+                        <input type="text" id="b_lugar_nacimiento" name="lugar_nacimiento">
+                    </div>
+                    <div class="form-group">
+                        <label for="b_nombre_padre">Nombre del padre:</label>
+                        <input type="text" id="b_nombre_padre" name="nombre_padre">
+                    </div>
+                    <div class="form-group">
+                        <label for="b_nombre_madre">Nombre de la madre:</label>
+                        <input type="text" id="b_nombre_madre" name="nombre_madre">
+                    </div>
+                    <div class="form-group">
+                        <label for="b_numero_acta">Número de acta:</label>
+                        <input type="text" id="b_numero_acta" name="numero_acta">
+                    </div>
+                    <div class="form-group">
+                        <label for="b_fecha_registro">Fecha de registro:</label>
+                        <input type="text" id="b_fecha_registro" name="fecha_registro">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit">Guardar</button>
+                        <button type="reset">Limpiar</button>
+                    </div>
+                </form>
+                
+                <!-- Formulario para Acta de Matrimonio -->
+                <form id="marriageForm" class="registration-form">
+                    <h3>Acta de Matrimonio</h3>
+                    <div class="form-group">
+                        <label for="m_conyuge_1">Cónyuge 1:</label>
+                        <input type="text" id="m_conyuge_1" name="conyuge_1">
+                    </div>
+                    <div class="form-group">
+                        <label for="m_conyuge_2">Cónyuge 2:</label>
+                        <input type="text" id="m_conyuge_2" name="conyuge_2">
+                    </div>
+                    <div class="form-group">
+                        <label for="m_fecha_matrimonio">Fecha de matrimonio:</label>
+                        <input type="text" id="m_fecha_matrimonio" name="fecha_matrimonio">
+                    </div>
+                    <div class="form-group">
+                        <label for="m_lugar_matrimonio">Lugar de matrimonio:</label>
+                        <input type="text" id="m_lugar_matrimonio" name="lugar_matrimonio">
+                    </div>
+                    <div class="form-group">
+                        <label for="m_padres_conyuge_1">Padres del cónyuge 1:</label>
+                        <input type="text" id="m_padres_conyuge_1" name="padres_conyuge_1">
+                    </div>
+                    <div class="form-group">
+                        <label for="m_padres_conyuge_2">Padres del cónyuge 2:</label>
+                        <input type="text" id="m_padres_conyuge_2" name="padres_conyuge_2">
+                    </div>
+                    <div class="form-group">
+                        <label for="m_numero_acta">Número de acta:</label>
+                        <input type="text" id="m_numero_acta" name="numero_acta">
+                    </div>
+                    <div class="form-group">
+                        <label for="m_fecha_registro">Fecha de registro:</label>
+                        <input type="text" id="m_fecha_registro" name="fecha_registro">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit">Guardar</button>
+                        <button type="reset">Limpiar</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2025 Extractor de Datos de Actas</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

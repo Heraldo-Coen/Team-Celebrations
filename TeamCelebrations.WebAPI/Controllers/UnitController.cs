@@ -56,7 +56,13 @@ namespace TeamCelebrations.WebAPI.Controllers
         {
             try
             {
-                var units = await _dataContext.Units!.ToListAsync();
+                var units = await _dataContext.Units!.Select( u => new UnitResponse 
+                {
+                    Id = u.Id,
+                    Name = u.Name,
+                    Acronym = u.Acronym,
+                    HigherUnitId = u.HigherUnitId!
+                }).ToListAsync();
 
                 if (units.Count == 0)
                 {

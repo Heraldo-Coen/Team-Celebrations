@@ -24,6 +24,61 @@ namespace TeamCelebrations.WebAPI.Controllers
         {
             try
             {
+                // For User properties
+                if (string.IsNullOrEmpty(employeeSignUpRequest.FirstName)) 
+                {
+                    return BadRequest(new { message = "First name is required." });
+                }
+                else if (string.IsNullOrEmpty(employeeSignUpRequest.LastName))
+                {
+                    return BadRequest(new { message = "Last name is required." });
+                }
+                else if (string.IsNullOrEmpty(employeeSignUpRequest.Email))
+                {
+                        return BadRequest(new { message = "Email is required." });
+                }
+                else if (employeeSignUpRequest.PasswordHash == null || employeeSignUpRequest.PasswordHash.Length == 0)
+                {
+                        return BadRequest(new { message = "Password is required." });
+                }
+
+                // For Employee properties
+                else if (string.IsNullOrEmpty(employeeSignUpRequest.DNI))
+                {
+                    return BadRequest(new { message = "DNI is required." });
+                }
+                else if (string.IsNullOrEmpty(employeeSignUpRequest.PhoneNumber))
+                {
+                    return BadRequest(new { message = "Phone number is required." });
+                }
+                else if (employeeSignUpRequest.PhoneCodeId == Guid.Empty)
+                {
+                    return BadRequest(new { message = "Phone code is required." });
+                }
+                else if (employeeSignUpRequest.BirthDate == DateTime.MinValue)
+                {
+                    return BadRequest(new { message = "Birth date is required." });
+                }
+                else if (employeeSignUpRequest.UnitId == Guid.Empty)
+                {
+                    return BadRequest(new { message = "Unit is required." });
+                }
+
+                // Phone validation
+                var phoneCode = await _dataContext!.PhoneCodes!.FindAsync(employeeSignUpRequest.PhoneCodeId);
+                
+                if (phoneCode == null)
+                {
+                    return NotFound(new { message = "Phone code not found." });
+                }
+                else
+                {
+                    if (phoneCode.Length != employeeSignUpRequest.PhoneNumber.Length)
+                    {
+                        return BadRequest(new { message = "Phone number is invalid." });
+                    }
+                }
+
                 await _dataContext!.Employees!.AddAsync(new Employee()
                 {
                     FirstName = employeeSignUpRequest!.FirstName,
@@ -34,11 +89,26 @@ namespace TeamCelebrations.WebAPI.Controllers
                     PhoneNumber = employeeSignUpRequest.PhoneNumber,
                     PhoneCodeId = employeeSignUpRequest.PhoneCodeId,
                     BirthDate = employeeSignUpRequest.BirthDate,
-                    //HireDate = employeeSignUpRequest.HireDate,
                     UnitId = employeeSignUpRequest.UnitId
                 });
 
                 await _dataContext.SaveChangesAsync();
+
+                if (employeeSignUpRequest.LastContract != null)
+                {
+                    await _dataContext.Contracts!.AddAsync(new Contract()
+                    {
+                        EmployeeId = employeeSignUpRequest.LastContract.EmployeeId,
+                        ContractStartDate = employeeSignUpRequest.LastContract.ContractStartDate,
+                        ContractEndDate = employeeSignUpRequest.LastContract.ContractEndDate,
+                        RenewalDate = employeeSignUpRequest.LastContract.RenewalDate,
+                        Status = employeeSignUpRequest.LastContract.Status,
+                        Type = employeeSignUpRequest.LastContract.Type
+                    });
+
+                    await _dataContext.SaveChangesAsync();
+                }
+
                 /*
                 BackgroundJob.Schedule(() =>
                     Services.EmailServices.EmailAuthenticator.WelcomeStudentEmail(signUpRequest.Email!, $"{signUpRequest.FirstName} {signUpRequest.LastName}"),
@@ -293,7 +363,76 @@ namespace TeamCelebrations.WebAPI.Controllers
                 return BadRequest(ex.ToString());
             }
         }
-        
+
+        /// <summary>
+        /// For user employees
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetAll")]
+        public async Task<ActionResult> GetAll(int pageNumber = 1, int pageSize = 20)
+        {
+            try
+            {
+                var query = _dataContext.Employees!
+                    .Where(e => e.IsEnabled && e.IsAccepted)
+                    .Select(e => new EmployeeProfileResponse
+                    {
+                        Id = e.Id,
+                        FirstName = e.FirstName,
+                        LastName = e.LastName,
+                        Email = e.Email,
+                        IsConnected = e.IsConnected,
+                        LastConnectionDate = e.LastConnectionDate,
+                        PhoneNumber = e.PhoneNumber,
+                        BirthDate = e.BirthDate,
+                        PhoneCode = new PhoneCodeResponse
+                        {
+                            Id = e.PhoneCode!.Id,
+                            Code = e.PhoneCode.Code,
+                            Length = e.PhoneCode.Length,
+                            CountryName = e.PhoneCode.CountryName,
+                            CountryCode = e.PhoneCode.CountryCode
+                        },
+                        Unit = new UnitResponse
+                        {
+                            Id = e.Unit!.Id,
+                            Name = e.Unit.Name,
+                            Acronym = e.Unit.Acronym,
+                            HigherUnitId = e.Unit.HigherUnitId
+                        }
+                    });
+
+                var totalRecords = await query.CountAsync();
+                var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
+
+                var employees = await query
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                if (employees.Count == 0)
+                {
+                    return NotFound(new { message = "Employees not found." });
+                }
+
+                var response = new
+                {
+                    TotalRecords = totalRecords,
+                    TotalPages = totalPages,
+                    CurrentPage = pageNumber,
+                    PageSize = pageSize,
+                    Employees = employees
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+
         #endregion
     }
 }

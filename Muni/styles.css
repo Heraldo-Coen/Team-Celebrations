@@ -1,0 +1,342 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    color: #1e88e5;
+    margin-bottom: 10px;
+}
+
+/* Sección de carga de archivos */
+.upload-section {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.upload-area {
+    border: 2px dashed #1e88e5;
+    border-radius: 10px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.upload-area:hover, .upload-area.dragover {
+    background-color: #e3f2fd;
+    border-color: #1565c0;
+}
+
+.upload-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+    opacity: 0.7;
+}
+
+.browse-link {
+    color: #1e88e5;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.file-types {
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 10px;
+}
+
+.selected-file {
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.analyze-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #1e88e5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.analyze-button:hover {
+    background-color: #1565c0;
+}
+
+.analyze-button:disabled {
+    background-color: #b0bec5;
+    cursor: not-allowed;
+}
+
+/* Sección de resultados */
+.results-section {
+    display: none;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.loading {
+    display: none;
+    text-align: center;
+    padding: 30px;
+}
+
+.spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #1e88e5;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.results-container {
+    display: none;
+}
+
+.results-container h2 {
+    color: #1e88e5;
+    margin-bottom: 20px;
+}
+
+.document-preview, .extracted-data, .raw-text {
+    margin-bottom: 30px;
+}
+
+.document-preview h3, .extracted-data h3, .raw-text h3 {
+    margin-bottom: 15px;
+    color: #424242;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+.fields-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.field-item {
+    background-color: #f5f7fa;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #1e88e5;
+}
+
+.field-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #616161;
+}
+
+.field-value {
+    font-size: 1.1rem;
+    word-break: break-word;
+}
+
+.raw-text-container {
+    background-color: #f5f7fa;
+    padding: 15px;
+    border-radius: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-family: monospace;
+    line-height: 1.5;
+}
+
+/* Estilos para previsualización del documento */
+#documentPreview {
+    max-width: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+#documentPreview img {
+    max-width: 100%;
+    max-height: 400px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.pdf-preview {
+    width: 100%;
+    height: 400px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Estilos para el formulario de registro */
+.form-section {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+}
+
+.form-section h2 {
+    color: #1e88e5;
+    margin-bottom: 20px;
+}
+
+.form-toggle {
+    display: flex;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.form-toggle-btn {
+    flex: 1;
+    padding: 12px;
+    background-color: #e0e0e0;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.form-toggle-btn.active {
+    background-color: #1e88e5;
+    color: white;
+}
+
+.registration-form {
+    display: none;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.registration-form.active-form {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #616161;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #1e88e5;
+    box-shadow: 0 0 0 2px rgba(30, 136, 229, 0.2);
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-actions button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.form-actions button[type="submit"] {
+    background-color: #1e88e5;
+    color: white;
+}
+
+.form-actions button[type="submit"]:hover {
+    background-color: #1565c0;
+}
+
+.form-actions button[type="reset"] {
+    background-color: #f5f5f5;
+    color: #616161;
+}
+
+.form-actions button[type="reset"]:hover {
+    background-color: #e0e0e0;
+}
+
+.fill-form-button {
+    display: block;
+    margin: 20px 0;
+    padding: 10px 15px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.fill-form-button:hover {
+    background-color: #3d8b40;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #757575;
+    font-size: 0.9rem;
+}

@@ -15,16 +15,33 @@ namespace TeamCelebrations.WebAPI.Controllers
     {
         [HttpPost]
         [Route("Create")]
-        public async Task<ActionResult> Create(PhoneCode phoneCode)
+        public async Task<ActionResult> Create(PhoneCodeRequest phoneCodeRequest)
         {
             try
             {
+                if(phoneCodeRequest.Code == 0)
+                {
+                    return BadRequest(new { message = "Invalid Code." });
+                }
+                else if (phoneCodeRequest.Length == 0)
+                {
+                    return BadRequest(new { message = "Invalid Length." });
+                }
+                else if (string.IsNullOrEmpty(phoneCodeRequest.CountryName))
+                {
+                    return BadRequest(new { message = "Invalid CountryName." });
+                }
+                else if (string.IsNullOrEmpty(phoneCodeRequest.CountryCode))
+                {
+                    return BadRequest(new { message = "Invalid CountryCode." });
+                }
+
                 await _dataContext!.PhoneCodes!.AddAsync(new PhoneCode()
                 {
-                    Code = phoneCode.Code,
-                    Length = phoneCode.Length,
-                    CountryName = phoneCode.CountryName,
-                    CountryCode = phoneCode.CountryCode
+                    Code = phoneCodeRequest.Code,
+                    Length = phoneCodeRequest.Length,
+                    CountryName = phoneCodeRequest.CountryName,
+                    CountryCode = phoneCodeRequest.CountryCode
                 });
 
                 await _dataContext.SaveChangesAsync();
@@ -43,6 +60,34 @@ namespace TeamCelebrations.WebAPI.Controllers
                     return Conflict(new { message = "Email already used." });
                 }
 
+                return BadRequest(ex.ToString());
+            }
+        }
+
+        [HttpGet]
+        [Route("GetAll")]
+        public async Task<ActionResult> GetAll()
+        {
+            try
+            {
+                var phoneCodes = await _dataContext!.PhoneCodes!.Select( p => new PhoneCodeResponse
+                {
+                    Id = p.Id,
+                    Code = p.Code,
+                    Length = p.Length,
+                    CountryName = p.CountryName,
+                    CountryCode = p.CountryCode
+                }).ToListAsync();
+
+                if (phoneCodes.Count == 0)
+                {
+                    return NoContent();
+                }
+
+                return Ok(phoneCodes);
+            }
+            catch (Exception ex)
+            {
                 return BadRequest(ex.ToString());
             }
         }
